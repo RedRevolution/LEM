@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 将namespace的值设置为DAO类对应的路径 -->
+<mapper namespace="com.red.LEM.dao.EquipmentDao">
+
+    <!-- 查询数据条目 -->
+    <select id="getTotal" resultType="int">
+        SELECT COUNT(*) FROM equipment
+    </select>
+
+    <!-- 增加一条数据 -->
+    <insert id="addEquipment" parameterType="Equipment">
+        INSERT INTO equipment(e_name, l_name, p_name, create_time) VALUES(#{eName}, #{lName}, #{pName}, #{createTime})
+    </insert>
+
+    <resultMap id="equipment_map" type="Equipment">
+        <id column="id" property="id"/>
+        <result column="id" property="id"/>
+        <result column="e_name" property="eName"/>
+        <result column="l_name" property="lName"/>
+        <result column="p_name" property="pName"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 查询从start位置开始的count条数据-->
+    <select id="list" resultMap="equipment_map">
+        SELECT * FROM equipment ORDER BY id desc limit #{param1}, #{param2}
+    </select>
+</mapper>
