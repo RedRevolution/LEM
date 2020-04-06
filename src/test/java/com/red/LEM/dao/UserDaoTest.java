@@ -10,7 +10,7 @@ public class UserDaoTest extends BaseTest {
 
     @Test
     public void testfindUser(){
-        User a = userDao.findUser("red","4QrcOUm6Wau+VuBX8g+IPg==");
+        User a = userDao.findUserByName("red");
         System.out.println(a.getPassword());
         System.out.println(a.getUsername());
         //System.out.println(userDao.findUser("ed","123456"));

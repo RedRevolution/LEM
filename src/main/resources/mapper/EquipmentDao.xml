@@ -5,27 +5,48 @@
 <!-- 将namespace的值设置为DAO类对应的路径 -->
 <mapper namespace="com.red.LEM.dao.EquipmentDao">
 
+    <!-- 查询该实验室最大分配ID -->
+    <select id="findMaxId" parameterType="java.lang.String" resultType="String">
+        SELECT max(e_id) FROM equipment WHERE l_name = #{lName}
+    </select>
+
+    <!-- 增加一条数据 -->
+    <insert id="addEquipment" parameterType="Equipment">
+        INSERT INTO equipment(e_id, e_name, l_name, p_name, create_time) VALUES(#{eId}, #{eName}, #{lName}, #{pName}, #{createTime})
+    </insert>
+
+    <!-- 删除一条数据 -->
+    <delete id="deleteEquipment" parameterType="String">
+        DELETE FROM equipment WHERE e_id = #{eId}
+    </delete>
+
     <!-- 查询数据条目 -->
     <select id="getTotal" resultType="int">
         SELECT COUNT(*) FROM equipment
     </select>
 
-    <!-- 增加一条数据 -->
-    <insert id="addEquipment" parameterType="Equipment">
-        INSERT INTO equipment(e_name, l_name, p_name, create_time) VALUES(#{eName}, #{lName}, #{pName}, #{createTime})
-    </insert>
+    <!-- 查询从start位置开始的count条数据-->
+    <select id="list" resultMap="equipment_map">
+        SELECT * FROM equipment ORDER BY id desc limit #{param1}, #{param2}
+    </select>
+
+    <!-- 模糊查询数据条目 -->
+    <select id="getTotalPlus" resultType="int">
+        SELECT COUNT(*) FROM equipment WHERE ${param1} LIKE #{param2}
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="listPlus" resultMap="equipment_map">
+        SELECT * FROM equipment WHERE ${param1} LIKE #{param2} ORDER BY id desc limit #{param3}, #{param4}
+    </select>
 
     <resultMap id="equipment_map" type="Equipment">
-        <id column="id" property="id"/>
-        <result column="id" property="id"/>
+        <!--<id column="id" property="id"/>-->
+        <result column="e_id" property="eId"/>
         <result column="e_name" property="eName"/>
         <result column="l_name" property="lName"/>
         <result column="p_name" property="pName"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
 
-    <!-- 查询从start位置开始的count条数据-->
-    <select id="list" resultMap="equipment_map">
-        SELECT * FROM equipment ORDER BY id desc limit #{param1}, #{param2}
-    </select>
 </mapper>

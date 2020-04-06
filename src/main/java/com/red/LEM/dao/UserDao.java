@@ -4,6 +4,7 @@ import com.red.LEM.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {
-    User findUser(@Param("username") String username,
-                  @Param("password") String password);
+    User findUserByName(@Param("username") String username);
+    void addUser(@Param("username") String username,
+                 @Param("password") String password);
 }

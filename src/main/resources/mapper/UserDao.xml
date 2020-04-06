@@ -6,8 +6,13 @@
 <mapper namespace="com.red.LEM.dao.UserDao">
 
     <!-- 查询 -->
-    <select id="findUser" resultType="User">
-        SELECT * FROM user where username = #{username} and password = #{password}
+    <select id="findUserByName" resultType="User">
+        SELECT * FROM user where username = #{username}
+    </select>
+
+    <!-- 添加 -->
+    <select id="addUser">
+        INSERT INTO user values(NULL, #{username}, #{password})
     </select>
 
 </mapper>

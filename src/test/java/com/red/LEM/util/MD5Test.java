@@ -9,11 +9,15 @@ public class MD5Test {
 
     @Test
     public void testmd5() {
-        try {
-            System.out.println(md5("123456"));
-            System.out.println(md5("123456"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        String a = "啊a题";
+////        System.out.println(a.charAt(2));
+        System.out.println(Allocate.allocateId("ASC101011"));
+
+//        try {
+//            System.out.println(md5("123456"));
+//            System.out.println(md5("123456"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
